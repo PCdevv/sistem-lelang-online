@@ -16,6 +16,75 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                @if (Auth::user()->level == "masyarakat")
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('lelang.saya')" :active="request()->routeIs('lelang.saya')">
+                        {{ __('Data Penawaran Anda') }}
+                    </x-nav-link>
+                </div>
+                @endif
+                @if (Auth::user()->level == "admin")
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('user.index', ['level' => 'admin'])" :active="request()->is('data/user/admin*')">
+                        {{ __('Data Admin') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('user.index', ['level' => 'petugas'])" :active="request()->is('data/user/petugas*')">
+                        {{ __('Data Petugas') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('user.index', ['level' => 'masyarakat'])" :active="request()->is('data/user/masyarakat*')">
+                        {{ __('Data Masyarakat') }}
+                    </x-nav-link>
+                </div>
+                @endif
+                @if (Auth::user()->level == "petugas")
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('lelang.index')" :active="request()->is('data/lelang*')">
+                        {{ __('Data Lelang') }}
+                    </x-nav-link>
+                </div>
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('penawaran.index')" :active="request()->is('data/penawaran*')">
+                        {{ __('Data Penawaran') }}
+                    </x-nav-link>
+                </div> --}}
+                @endif
+                @if (Auth::user()->level == "admin" || Auth::user()->level == "petugas")
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('barang.index')" :active="request()->is('data/barang*')">
+                        {{ __('Data Barang') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden sm:flex sm:items-center sm:ml-6">
+                    <x-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <x-nav-link class="overflow-clip-hidden" :active="request()->is('data/laporan*')">
+                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                <div>Laporan</div>
+    
+                                <div class="ml-1">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </button>
+                            </x-nav-link>
+                        </x-slot>
+                            
+                        <x-slot name="content">
+                            <x-dropdown-link :href="route('laporan.lelang')">
+                                {{ __('Laporan Lelang') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('laporan.penawaran')">
+                                {{ __('Laporan History') }}
+                            </x-dropdown-link>
+                        </x-slot>
+                    </x-dropdown>
+                </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->
@@ -23,7 +92,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            <div>{{ Auth::user()->name }} | {{ Auth::user()->level }}</div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -68,7 +137,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('Sistem Lelang Online') }}
             </x-responsive-nav-link>
         </div>
 

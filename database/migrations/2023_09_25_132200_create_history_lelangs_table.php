@@ -18,9 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('id_masyarakat')->nullable();
             $table->unsignedBigInteger('penawaran_harga')->nullable();
 
-            $table->foreign('id_barang')->references('id_barang')->on('barangs')->onDelete('cascade');
-            $table->foreign('id_lelang')->references('id_lelang')->on('lelangs')->onDelete('cascade');
-            $table->foreign('id_masyarakat')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_barang')->references('id_barang')->on('barangs');
+            $table->foreign('id_lelang')->references('id_lelang')->on('lelangs');
+            $table->foreign('id_masyarakat')->references('id')->on('users');
         });
     }
 

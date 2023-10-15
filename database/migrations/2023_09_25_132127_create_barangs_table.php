@@ -15,6 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_barang')->autoIncrement();
             $table->string('nama_barang');
             $table->string('deskripsi_barang');
+            $table->string('foto')->nullable();
             $table->bigInteger('harga_awal');
             $table->timestamp('tgl')->default(now());
         });

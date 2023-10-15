@@ -11,4 +11,13 @@ class HistoryLelang extends Model
     public $timestamps = false;
     protected $guarded = [];
     protected $primaryKey = 'id_history';
+
+    public function data_penawar()
+    {
+        return $this->hasOne(User::class, 'id', 'id_masyarakat');
+    }
+    public function data_barang()
+    {
+        return $this->hasOne(Barang::class, 'id_barang');
+    }
 }

@@ -11,4 +11,13 @@ class Lelang extends Model
     public $timestamps = false;
     protected $guarded = [];
     protected $primaryKey = 'id_lelang';
+
+    public function data_barang()
+    {
+        return $this->hasOne(Barang::class, 'id_barang');
+    }
+    public function data_masyarakat()
+    {
+        return $this->hasOne(User::class, 'id', 'id_masyarakat');
+    }
 }

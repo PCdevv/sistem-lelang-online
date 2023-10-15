@@ -16,13 +16,13 @@ return new class extends Migration
             $table->unsignedBigInteger('id_barang')->nullable();
             $table->unsignedBigInteger('id_masyarakat')->nullable();
             $table->unsignedBigInteger('id_petugas')->nullable();
-            $table->bigInteger('harga_akhir');
+            $table->bigInteger('harga_akhir')->nullable();
             $table->timestamp('tgl_lelang')->default(now());
-            $table->enum('startus', ['0', 'dibuka', 'ditutup']);
+            $table->enum('status', ['0', 'dibuka', 'ditutup']);
 
-            $table->foreign('id_barang')->references('id_barang')->on('barangs')->onDelete('cascade');
-            $table->foreign('id_masyarakat')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('id_petugas')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_barang')->references('id_barang')->on('barangs');
+            $table->foreign('id_masyarakat')->references('id')->on('users');
+            $table->foreign('id_petugas')->references('id')->on('users');
         });
     }
 

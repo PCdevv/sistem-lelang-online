@@ -12,7 +12,8 @@ class HistoryLelangController extends Controller
      */
     public function index()
     {
-        //
+        $penawaran = HistoryLelang::with('data_penawar', 'data_barang')->get();
+        return view('penawaran.index', ['penawaran' => $penawaran]);
     }
 
     /**
